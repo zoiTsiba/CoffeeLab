@@ -27,9 +27,29 @@ eordspan.onclick = function () {
 
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function (event) {
-    if (event.target == nordmodel) {
+    if (event.target == nordmodal) {
         nordmodal.style.display = "none";
-    } else if (event.target == nordmodel){
+    } else if (event.target == eordmodal) {
         eordmodal.style.display = "none";
     }
+}
+
+
+function getLinks() {
+    var store = document.getElementById("inputStore").value;
+    if (store == "Mikel") {
+        document.getElementById("link").innerHTML = 'https://www.e-food.gr/delivery/menu/mikel';
+        document.getElementById("link").href = 'https://www.e-food.gr/delivery/menu/mikel';
+    } else if (store == "Coffee Island") {
+        document.getElementById("link").innerHTML = 'https://www.e-food.gr/delivery/menu/coffee-island';
+        document.getElementById("link").href = 'https://www.e-food.gr/delivery/menu/coffee-island';
+    } else if (store == "Lodge") {
+        document.getElementById("link").innerHTML = 'https://www.e-food.gr/delivery/thessaloniki-thermi/lodge';
+        document.getElementById("link").href = 'https://www.e-food.gr/delivery/thessaloniki-thermi/lodge';
+    }
+}
+
+function getOrders() {
+    var orders = document.getElementById("ordersTable");
+    var o = document.getElementById("ordersTable").rows[0].cells.length;
 }
