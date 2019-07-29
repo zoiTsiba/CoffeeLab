@@ -11,6 +11,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/addons/datatables.min.js"></script>
+    <script type="text/javascript" src="js/storage.js"></script>
     <!-- MDBootstrap Datatables  -->
     <link href="css/addons/datatables.min.css" rel="stylesheet">
     <link href="css/modals.css" rel="stylesheet">
@@ -60,9 +61,9 @@
                         </th>
                         <th class="th-sm">Shop
                         </th>
-                        <th class="th-sm">Order Start
+                        <th class="th-sm">IBAN
                         </th>
-                        <th class="th-sm">Order Finish
+                        <th class="th-sm">Duration
                         </th>
                         <th class="th-sm">Overall Price
                         </th>
@@ -71,112 +72,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Herrod Chandler</td>
-                        <td>Sales Assistant</td>
-                        <td>San Francisco</td>
-                        <td>59</td>
-                        <td>2012/08/06</td>
-                        <td>$137,500</td>
-                    </tr>
-                    <tr>
-                        <td>Rhona Davidson</td>
-                        <td>Integration Specialist</td>
-                        <td>Tokyo</td>
-                        <td>55</td>
-                        <td>2010/10/14</td>
-                        <td>$327,900</td>
-                    </tr>
-                    <tr>
-                        <td>Colleen Hurst</td>
-                        <td>Javascript Developer</td>
-                        <td>San Francisco</td>
-                        <td>39</td>
-                        <td>2009/09/15</td>
-                        <td>$205,500</td>
-                    </tr>
-                    <tr>
-                        <td>Sonya Frost</td>
-                        <td>Software Engineer</td>
-                        <td>Edinburgh</td>
-                        <td>23</td>
-                        <td>2008/12/13</td>
-                        <td>$103,600</td>
-                    </tr>
-                    <tr>
-                        <td>Jena Gaines</td>
-                        <td>Office Manager</td>
-                        <td>London</td>
-                        <td>30</td>
-                        <td>2008/12/19</td>
-                        <td>$90,560</td>
-                    </tr>
-                    <tr>
-                        <td>Quinn Flynn</td>
-                        <td>Support Lead</td>
-                        <td>Edinburgh</td>
-                        <td>22</td>
-                        <td>2013/03/03</td>
-                        <td>$342,000</td>
-                    </tr>
-                    <tr>
-                        <td>Herrod Chandler</td>
-                        <td>Sales Assistant</td>
-                        <td>San Francisco</td>
-                        <td>59</td>
-                        <td>2012/08/06</td>
-                        <td>$137,500</td>
-                    </tr>
-                    <tr>
-                        <td>Rhona Davidson</td>
-                        <td>Integration Specialist</td>
-                        <td>Tokyo</td>
-                        <td>55</td>
-                        <td>2010/10/14</td>
-                        <td>$327,900</td>
-                    </tr>
-                    <tr>
-                        <td>Colleen Hurst</td>
-                        <td>Javascript Developer</td>
-                        <td>San Francisco</td>
-                        <td>39</td>
-                        <td>2009/09/15</td>
-                        <td>$205,500</td>
-                    </tr>
-                    <tr>
-                        <td>Sonya Frost</td>
-                        <td>Software Engineer</td>
-                        <td>Edinburgh</td>
-                        <td>23</td>
-                        <td>2008/12/13</td>
-                        <td>$103,600</td>
-                    </tr>
-                    <tr>
-                        <td>Jena Gaines</td>
-                        <td>Office Manager</td>
-                        <td>London</td>
-                        <td>30</td>
-                        <td>2008/12/19</td>
-                        <td>$90,560</td>
-                    </tr>
-                    <tr>
-                        <td>Quinn Flynn</td>
-                        <td>Support Lead</td>
-                        <td>Edinburgh</td>
-                        <td>22</td>
-                        <td>2013/03/03</td>
-                        <td>$342,000</td>
-                    </tr>
-                    <tr>
-                        <td>Tiger Nixon</td>
-                        <td>System Architect</td>
-                        <td>Edinburgh</td>
-                        <td>61</td>
-                        <td>2011/04/25</td>
-                        <td>$320,800</td>
-                    </tr>
-
-
+                    
                 </tbody>
                 <tfoot> </tfoot>
             </table>
@@ -231,13 +127,17 @@
                                 </div>
                             </div>
                             <div class="form-group col-md-4">
-                                <label for="validationCustom04">Time</label>
+                                <label for="validationCustom04">Duration(Min)</label>
                                 <select id="inputTime" class="custom-select" required>
                                     <option selected>Choose...</option>
-                                    <option>10 min</option>
-                                    <option>20 min</option>
-                                    <option>30 min</option>
+                                    <option>10</option>
+                                    <option>15</option>
+                                    <option>20</option>
+                                    <option>25</option>
+                                    <option>30</option>
+                                    <option>35</option>
                                 </select>
+                                <div class="invalid-feedback">Example invalid custom select feedback</div>
                             </div>
                             <div class="col-md-3 mb-3">
                                 <label for="validationCustom06">Your Order</label>
