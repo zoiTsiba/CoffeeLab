@@ -50,6 +50,9 @@ function getLinks() {
 }
 
 function getOrders() {
-    var orders = document.getElementById("ordersTable");
-    var o = document.getElementById("ordersTable").rows[0].cells.length;
+    let orders = document.getElementById("ordersTable").rows;
+    for (let i = 0; i < orders.length; i++) {
+        let td = orders[i].getElementsByTagName("td")[i].name;
+        console.log(td);
+    }
 }

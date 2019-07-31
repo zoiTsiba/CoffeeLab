@@ -39,9 +39,9 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <div class="navbar-nav">
-                    <a href="#" class="nav-item nav-link active">Home</a>
-                    <a href="#" class="nav-item nav-link">Services</a>
-                    <a href="#" class="nav-item nav-link">About</a>
+                    <a href="./" class="nav-item nav-link active">Home</a>
+                    <a href="." class="nav-item nav-link">Services</a>
+                    <a href="./about" class="nav-item nav-link">About</a>
                     <a href="#" class="nav-item nav-link">Contact</a>
 
                 </div>
@@ -67,12 +67,21 @@
                         </th>
                         <th class="th-sm">Overall Price
                         </th>
-                        <th class="th-sm">Minimum Order
+                        <th class="th-sm">Order
                         </th>
                     </tr>
                 </thead>
                 <tbody>
-                    
+                    <% for (let i = 0; i < orders.length; i++) { %>
+                    <tr>
+                        <td><%= orders[i].firstname %> <%= orders[i].lastname %></td>
+                        <td><%= orders[i].store %></td>
+                        <td><%= orders[i].iban %></td>
+                        <td></td>
+                        <td><%= orders[i].cost %></td>
+                        <td><%= orders[i].order %></td>
+                    </tr>
+                    <% } %>
                 </tbody>
                 <tfoot> </tfoot>
             </table>
@@ -89,28 +98,23 @@
                 <!-- Modal content -->
                 <div class="modal-content">
                     <span class="close" id="newOrderSpan">&times;</span>
-                    <form class="needs-validation" validate>
+                    <form action="/putOrder" method="POST" class="needs-validation" validate>
                         <div class="form-row">
                             <div class="col-md-4 mb-3">
                                 <label for="validationCustom01">First name</label>
-                                <input id="newOrderName" type="text" class="form-control" id="validationCustom01x"
+                                <input id="newOrderName" type="text" class="form-control" name="firstName"
                                     placeholder="First name" required>
-                                <div class="invalid-tooltip">
-                                    Please provide a valid first name.
-                                </div>
                             </div>
                             <div class="col-md-4 mb-3">
                                 <label for="validationCustom02">Last name</label>
-                                <input id="newOrderLastName" type="text" class="form-control" id="validationTooltip02" placeholder="Last name"
-                                    required>
-                                <div class="invalid-tooltip">
-                                    Please provide a valid last name.
-                                </div>
+                                <input id="newOrderLastName" type="text" class="form-control" name="lastName"
+                                    placeholder="Last name" required>
                             </div>
                             <div class="form-group col-md-4">
                                 <label for="inputStore">Store</label>
-                                <select id="inputStore" class="custom-select" required onchange="getLinks()">
-                                    <option selected>Choose...</option>
+                                <select id="inputStore" class="custom-select" name="store" required
+                                    onchange="getLinks()">
+                                    <option value="">Choose...</option>
                                     <option>Coffee Island</option>
                                     <option>Mikel</option>
                                     <option>Lodge</option>
@@ -120,16 +124,13 @@
                         <div class="form-row">
                             <div class="col-md-6 mb-3">
                                 <label for="validationCustom03">IBAN</label>
-                                <input id="newOrderIBAN" type="text" class="form-control" id="validationTooltip03" placeholder="IBAN"
+                                <input id="newOrderIBAN" type="text" class="form-control" name="iban" placeholder="IBAN"
                                     required>
-                                <div class="invalid-tooltip">
-                                    Please provide a valid IBAN.
-                                </div>
                             </div>
                             <div class="form-group col-md-4">
                                 <label for="validationCustom04">Duration(Min)</label>
-                                <select id="inputTime" class="custom-select" required>
-                                    <option selected>Choose...</option>
+                                <select id="inputTime" class="custom-select" name="duration" required>
+                                    <option value="">Choose...</option>
                                     <option>10</option>
                                     <option>15</option>
                                     <option>20</option>
@@ -137,23 +138,16 @@
                                     <option>30</option>
                                     <option>35</option>
                                 </select>
-                                <div class="invalid-feedback">Example invalid custom select feedback</div>
                             </div>
                             <div class="col-md-3 mb-3">
                                 <label for="validationCustom06">Your Order</label>
-                                <input id="newOrderOrder" type="text" class="form-control" id="validationTooltip05"
+                                <input id="newOrderOrder" type="text" class="form-control" name="order"
                                     placeholder="What you want to order?" required>
-                                <div class="invalid-tooltip">
-                                    Please provide a valid order.
-                                </div>
                             </div>
                             <div class="col-md-3 mb-3">
                                 <label for="validationCustom07">Order Price</label>
-                                <input id="newOrderCost" type="text" class="form-control" id="validationTooltip05"
+                                <input id="newOrderCost" type="text" class="form-control" name="cost"
                                     placeholder="How much your order costs?" required>
-                                <div class="invalid-tooltip">
-                                    Please provide a valid price.
-                                </div>
                             </div>
                             <div class="col-md-3 mb-3">
                                 <label for="validationTooltip05">Check the Price:</label>
@@ -165,27 +159,8 @@
                                 </div>
                             </div>
                         </div>
-                        <script>
-                            // Example starter JavaScript for disabling form submissions if there are invalid fields
-                            (function () {
-                                'use strict';
-                                window.addEventListener('load', function () {
-                                    // Fetch all the forms we want to apply custom Bootstrap validation styles to
-                                    var forms = document.getElementsByClassName('needs-validation');
-                                    // Loop over them and prevent submission
-                                    var validation = Array.prototype.filter.call(forms, function (form) {
-                                        form.addEventListener('submit', function (event) {
-                                            if (form.checkValidity() === false) {
-                                                event.preventDefault();
-                                                event.stopPropagation();
-                                            }
-                                            form.classList.add('was-validated');
-                                        }, false);
-                                    });
-                                }, false);
-                            })();
-                        </script>
-                        <button class="btn btn-primary" type="submit" onclick="AddRowTable()">Submit Order</button>
+
+                        <button class="btn btn-primary" type="submit">Submit Order</button>
                     </form>
                 </div>
             </div>
@@ -219,8 +194,8 @@
                             </div>
                             <div class="form-group col-md-4">
                                 <label for="inputStore">Orders</label>
-                                <select id="inputStore" class="custom-select" required onchange="getLinks()">
-                                    <option selected>Choose...</option>
+                                <select id="inputStore" class="custom-select" required onchange="getOrders()">
+                                    <option value="">Choose...</option>
                                     <option>Coffee Island</option>
                                     <option>Mikel</option>
                                     <option>Lodge</option>
@@ -246,7 +221,7 @@
                             <div class="form-group col-md-4">
                                 <label for="validationCustom04">Time</label>
                                 <select id="inputTime" class="custom-select" required>
-                                    <option selected>Choose...</option>
+                                    <option value="">Choose...</option>
                                     <option>10 min</option>
                                     <option>20 min</option>
                                     <option>30 min</option>
@@ -308,8 +283,8 @@
                 <p>Bootstrap is a powerful front-end framework for faster and easier web development. Our Bootstrap
                     tutorials will help you to learn all the features of latest Bootstrap 4 framework so that you can
                     easily create responsive websites.</p>
-                <p><a href="https://www.tutorialrepublic.com/twitter-bootstrap-tutorial/" target="_blank"
-                        class="btn btn-success">Learn More &raquo;</a></p>
+                <p><a action="/getOrders" method="GET" target="_blank" class="btn btn-success">Learn More &raquo;</a>
+                </p>
             </div>
         </div>
         <hr>

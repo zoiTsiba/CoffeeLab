@@ -7,17 +7,23 @@ $(document).ready(function () {
 });
 
 var array = [];
+
 function AddRowTable() {
+
     // Table Rows
     let table = document.getElementById("ordersTable");
     // Form data initialize
-    let name = document.getElementById("newOrderName").value;
+    let firstName = document.getElementById("newOrderName").value;
     let lastName = document.getElementById("newOrderLastName").value;
     let store = document.getElementById("inputStore").value;
     let iban = document.getElementById("newOrderIBAN").value;
     let time = parseInt(document.getElementById("inputTime").value, 10);
     let order = document.getElementById("newOrderOrder").value;
     let cost = document.getElementById("newOrderCost").value;
+    // Error handling if form is empty
+    if (firstName === '' || lastName === '' || store === '' || iban === '' || time === '' || order === '' || cost === '') {
+        return 'Empty';
+    }
     // Time 
     let minutes = time - 1;
     let seconds = 60;
@@ -29,7 +35,7 @@ function AddRowTable() {
     let cell4 = row.insertCell(3);
     let cell5 = row.insertCell(4);
     let cell6 = row.insertCell(5);
-    cell1.innerHTML = name + ' ' + lastName;
+    cell1.innerHTML = firstName + ' ' + lastName;
     cell2.innerHTML = store;
     cell3.innerHTML = iban;
     let timer = setInterval(function () {
@@ -47,21 +53,11 @@ function AddRowTable() {
     cell5.innerHTML = order;
     cell6.innerHTML = cost;
 
-    let rec = record();
-    rec.setcost(cost);
-    rec.setiban(iban);
-    rec.setlastName(lastName);
-    rec.setname(name);
-    rec.setorder(order);
-    rec.setstore(store);
-    rec.settime(time);
-    array.push(rec);
-    localStorage.setItem("array", array);
 
 }
 
 function record() {
-    let name;
+    let firstName;
     let lastName;
     let store;
     let iban;
@@ -69,14 +65,14 @@ function record() {
     let order;
     let cost;
 
-    function getname() { return name; }
+    function getname() { return firstName; }
     function getlastName() { return lastName; }
     function getstore() { return store; }
     function getiban() { return iban; }
     function gettime() { return time; }
     function getorder() { return order; }
     function getcost() { return cost; }
-    function setname(name) { this.name = name; }
+    function setname(name) { this.firstName = firstName; }
     function setlastName(lastName) { this.lastName = lastName; }
     function setstore(store) { this.store = store; }
     function setiban(iban) { this.iban = iban; }
