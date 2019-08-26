@@ -1,14 +1,12 @@
 const AWS = require("aws-sdk");
-const ejs = require('ejs');
 const config = require('./config.js');
-const timer = require('../public/js/timer');
 let isDev = true;
 const uuid = require('node-uuid');
 const uuid1 = uuid.v1();
 
 module.exports = (app) => {
     // Gets all orders
-    app.get('/', (req, res, next) => {
+    app.get('/getOrders', (req, res, next) => {
         if (isDev) {
             AWS.config.update(config.aws_local_config);
         } else {
@@ -28,8 +26,8 @@ module.exports = (app) => {
                 });
             } else {
                 let { Items } = data;
-                // console.log(Items)
-                res.render('index', { orders: Items });
+                console.log(Items)
+                res.send(Items);
             }
         });
 
@@ -56,7 +54,8 @@ module.exports = (app) => {
                 store: body.store,
                 iban: body.iban,
                 order: body.order,
-                cost: body.cost
+                cost: body.cost,
+                duration: body.duration
             }
         };
         docClient.put(params, function (err, data) {
@@ -68,7 +67,7 @@ module.exports = (app) => {
                 });
             } else {
                 console.log("Order Inserted!")
-                timer.orderTimer(uuid1, body.firstName);
+                // timer.orderTimer(uuid1, body.firstName);
                 res.redirect('/');
             }
         });

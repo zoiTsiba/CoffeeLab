@@ -10,11 +10,14 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="my_jquery_functions.js"></script>
     <script type="text/javascript" src="js/addons/datatables.min.js"></script>
     <script type="text/javascript" src="js/storage.js"></script>
     <!-- MDBootstrap Datatables  -->
     <link href="css/addons/datatables.min.css" rel="stylesheet">
     <link href="css/modals.css" rel="stylesheet">
+
 
     <style>
         .main-content {
@@ -72,19 +75,60 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <% for (let i = 0; i < orders.length; i++) { %>
-                    <tr>
-                        <td><%= orders[i].firstname %> <%= orders[i].lastname %></td>
-                        <td><%= orders[i].store %></td>
-                        <td><%= orders[i].iban %></td>
-                        <td></td>
-                        <td><%= orders[i].cost %></td>
-                        <td><%= orders[i].order %></td>
-                    </tr>
-                    <% } %>
                 </tbody>
                 <tfoot> </tfoot>
             </table>
+            <script>
+
+                $(document).ready(function () {
+                    $.ajax({
+                        url: "/getOrders", type: "GET", success: function (order) {
+                            console.log(order)
+                            let html = '<tr>';
+                            $.each(order, function (k, v) {
+                                html +=
+                                    '<td>' + v.firstname + ' ' + v.lastname + '</td>'
+                                    + '<td>' + v.store + '</td>'
+                                    + '<td>' + v.iban + '</td>'
+                                    + '<td>' + v.duration + '</td>'
+                                    + '<td>' + v.cost + '</td>'
+                                    + '<td>' + v.order + '</td>';
+                            });
+                            html += '<\tr>';
+                            $("#ordersTable > tbody").html(html)
+                        }
+                    });
+                });
+
+                function countdown(time) {
+                    time = parseInt(time);
+                    if (isNaN(time) || time > (60 * 60)) {
+                        localStorage.time = 30 * 60;
+                        countdown();
+                        return null;
+                    }
+
+                    if (time <= 0) {
+                        return null;
+                    }
+
+                    document.getElementById('timeleft').innerText = formatTime(time);
+                    time--;
+                    localStorage.time = time;
+                    setTimeout('countdown()', 1000);
+                }
+
+                function formatTime(time) {
+                    minutes = Math.floor(time / 60);
+                    seconds = time - minutes * 60;
+
+                    if (String(seconds).length == 1) {
+                        return String(minutes) + ":0" + String(seconds);
+                    }
+
+                    return String(minutes) + ":" + String(seconds);
+                }
+            </script>
             <script src="js/table.js"></script>
         </div>
         <div class="row">
@@ -283,8 +327,11 @@
                 <p>Bootstrap is a powerful front-end framework for faster and easier web development. Our Bootstrap
                     tutorials will help you to learn all the features of latest Bootstrap 4 framework so that you can
                     easily create responsive websites.</p>
-                <p><a action="/getOrders" method="GET" target="_blank" class="btn btn-success">Learn More &raquo;</a>
-                </p>
+                <button type="button" class="btn btn-success" id="test">test</button>
+                <script>
+
+                </script>
+
             </div>
         </div>
         <hr>

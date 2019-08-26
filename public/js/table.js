@@ -17,44 +17,16 @@ function AddRowTable() {
     let lastName = document.getElementById("newOrderLastName").value;
     let store = document.getElementById("inputStore").value;
     let iban = document.getElementById("newOrderIBAN").value;
-    let time = parseInt(document.getElementById("inputTime").value, 10);
+    let duration = parseInt(document.getElementById("inputTime").value, 10);
     let order = document.getElementById("newOrderOrder").value;
     let cost = document.getElementById("newOrderCost").value;
     // Error handling if form is empty
-    if (firstName === '' || lastName === '' || store === '' || iban === '' || time === '' || order === '' || cost === '') {
+    if (firstName === '' || lastName === '' || store === '' || iban === '' || duration === '' || order === '' || cost === '') {
         return 'Empty';
     }
-    // Time 
-    let minutes = time - 1;
-    let seconds = 60;
-
-    let row = table.insertRow(1);
-    let cell1 = row.insertCell(0);
-    let cell2 = row.insertCell(1);
-    let cell3 = row.insertCell(2);
-    let cell4 = row.insertCell(3);
-    let cell5 = row.insertCell(4);
-    let cell6 = row.insertCell(5);
-    cell1.innerHTML = firstName + ' ' + lastName;
-    cell2.innerHTML = store;
-    cell3.innerHTML = iban;
-    let timer = setInterval(function () {
-        cell4.innerHTML = minutes + "m " + seconds + "s ";
-        seconds--;
-        if (seconds === 0) {
-            minutes--;
-            seconds = 60;
-        }
-        if (minutes < 0) {
-            clearInterval(timer);
-            table.deleteRow(1);
-        }
-    }, 1000);
-    cell5.innerHTML = order;
-    cell6.innerHTML = cost;
-
 
 }
+
 
 function record() {
     let firstName;
