@@ -1,12 +1,25 @@
-// Basic example
+
+let data = [];
+
 $(document).ready(function () {
-    $('#ordersTable').DataTable({
-        "ordering": false // false to disable sorting (or any other option)
+    $.ajax({
+        url: "/getOrders", type: "GET", success: function (order) {
+            // console.log(order);
+            $.each(order, function (k, v) {
+                data.push({
+                    name: v.firstname + ' ' + v.lastname,
+                    store: v.store,
+                    iban: v.iban,
+                    duration: v.duration,
+                    cost: v.cost,
+                    order: v.order
+                });
+            });
+            $('#ordersTable').bootstrapTable({ data: data });
+        }
     });
-    $('.dataTables_length').addClass('bs-select');
 });
 
-var array = [];
 
 function AddRowTable() {
 
