@@ -1,3 +1,5 @@
+// nodemon app.js to start express client to localhost:3000
+
 'use strict'
 require('dotenv').config();
 const db = require('./db/CRUD');
