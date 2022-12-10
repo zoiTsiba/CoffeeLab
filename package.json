@@ -4,7 +4,7 @@
     "bootstrap-table": "^1.15.4",
     "dotenv": "^8.1.0",
     "ejs": "^2.6.2",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "node-uuid": "^1.4.8",
     "nodemon": "^1.19.1",
     "serverless-http": "^2.2.0"
